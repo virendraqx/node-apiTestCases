@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "mocha task.js"
+    "test": "mocha task.js",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
