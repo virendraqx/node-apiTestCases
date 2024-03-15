@@ -24,23 +24,23 @@ const tasks = [
 ];
 
 // GET
-fastify.get('/api/tasks' , (request, response) => {
-	response.send(tasks);
+fastify.get('/api/tasks' , (request, reply) => {
+	reply.send(tasks);
 });
 
 // GET (BY ID)
-fastify.get('/api/tasks/:id' , (request, response) => {
+fastify.get('/api/tasks/:id' , (request, reply) => {
 	const taskId = request.params.id;
 	const task = tasks.find(task => task.id === parseInt(taskId));
-	if(!task) return response.status(404).send('The task with the provided ID does not exist.');
-	response.send(task);
+	if(!task) return reply.status(404).send('The task with the provided ID does not exist.');
+	reply.send(task);
 });
 
 // POST
-fastify.post('/api/tasks', (request, response) => {
+fastify.post('/api/tasks', (request, reply) => {
 	// const { error } = utils.validateTask(request.body);
 
-	if(!(request.body.name && !request.body.completed)) return response.status(400).send('The name should be at least 3 chars long!');
+	if(!(request.body.name && !request.body.completed)) return reply.status(400).send('The name should be at least 3 chars long!');
 
 	const task = {
 		id : tasks.length + 1,
@@ -49,35 +49,35 @@ fastify.post('/api/tasks', (request, response) => {
 	};
 
 	tasks.push(task);
-	response.status(201).send(task);
+	reply.status(201).send(task);
 });
 
 //PUT
-fastify.put('/api/tasks/:id', (request, response) => {
+fastify.put('/api/tasks/:id', (request, reply) => {
 	const taskId = request.params.id;
 	const task = tasks.find(task => task.id === Number(taskId));
-	if(!task) return response.status(404).send('The task with the provided ID does not exist.');
+	if(!task) return reply.status(404).send('The task with the provided ID does not exist.');
 
 	// const { error } = utils.validateTask(request.body);
 
-	if(!(request.body.name && request.body.completed)) return response.status(400).send('The completed should be true!');
+	if(!(request.body.name && request.body.completed)) return reply.status(400).send('The completed should be true!');
 
 	task.name = request.body.name;
 	task.completed = request.body.completed;
 
-	response.send(task);
+	reply.send(task);
 });
 
 
 //DELETE
-fastify.delete('/api/tasks/:id', (request, response) => {
+fastify.delete('/api/tasks/:id', (request, reply) => {
 	const taskId = request.params.id;
 	const task = tasks.find(task => task.id === Number(taskId));
-	if(!task) return response.status(404).send('The task with the provided ID does not exist.');
+	if(!task) return reply.status(404).send('The task with the provided ID does not exist.');
 
 	const index = tasks.indexOf(task);
 	tasks.splice(index, 1);
-	response.send(task);
+	reply.send(task);
 });
 
 

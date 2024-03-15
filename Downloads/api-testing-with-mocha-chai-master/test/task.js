@@ -6,7 +6,7 @@ before(async () => {
 });
 let expect = chai.expect;
 // server.get('/',(req,rep)=>{
-// 	rep.send('hello world');
+// 	rep.send('hello worldfvbfsvbdgsvcdfbcxz');
 // });
 //Assertion Style
 chai.should();
@@ -26,7 +26,7 @@ describe('Tasks API', () => {
 					// response.should.have.status(200);
 					// response.body.should.be.a('array');
 					// response.body.length.should.be.eq(3);
-					expect(response).to.have.status(300);
+					expect(response).to.have.status(200);
 					expect(response.body).to.be.a('array');
 					expect(response.body).to.have.lengthOf(3);
 					done();
